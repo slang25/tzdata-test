@@ -17,6 +17,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/setup-dotnet@v3
+    
     - name: Download tzdata
       run: wget 'https://www.iana.org/time-zones/repository/tzdata-latest.tar.gz'
       
@@ -26,11 +28,19 @@ jobs:
     - name: Compile timezone data
       run: sudo zic -d tzdata_compiled/ africa antarctica asia australasia etcetera europe factory northamerica southamerica
 
-    - name: Compress compiled timezone data
-      run: tar -czvf tzdata_compiled.tar.gz tzdata_compiled
+    - name: Create .NET project
+      run: dotnet new classlib -n TimeZoneData
 
-    - name: Upload Compiled Timezone Data
-      uses: actions/upload-artifact@v2
+    - name: Add timezone data to project
+      run: mv tzdata_compiled/* TimeZoneData/
+
+    - name: Pack NuGet package
+      run: |
+        cd TimeZoneData
+        dotnet pack --output ./nupkgs /p:PackageVersion=1.0.0 /p:PackageId=YourPackageName
+    
+    - name: Upload NuGet Package
+      uses: actions/upload-artifact@v3
       with:
-        name: compiled-tzdata
-        path: tzdata_compiled.tar.gz
+        name: YourPackageName
+        path: ./nupkgs/YourPackageName.1.0.0.nupkg
