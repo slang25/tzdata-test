@@ -43,4 +43,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: YourPackageName
-        path: ./nupkgs/YourPackageName.1.0.0.nupkg
+        path: ./TimeZoneData/nupkgs/YourPackageName.1.0.0.nupkg
