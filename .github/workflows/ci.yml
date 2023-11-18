@@ -32,7 +32,7 @@ jobs:
       run: sudo zic -d tzdata_compiled/ africa antarctica asia australasia etcetera europe factory northamerica southamerica
 
     - name: Pack NuGet package
-      run: dotnet pack YourPackageName.nuspec -o nupkgs
+      run: dotnet pack YourPackageTitle.nuspec -o nupkgs
     
     - name: Upload NuGet Package
       uses: actions/upload-artifact@v3
