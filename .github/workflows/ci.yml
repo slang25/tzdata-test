@@ -32,11 +32,11 @@ jobs:
       run: dotnet new classlib -n TimeZoneData
 
     - name: Add timezone data to project
-      run: mv tzdata_compiled/* TimeZoneData/
+      run: mv tzdata_compiled/* ./TimeZoneData/
 
     - name: Pack NuGet package
       run: |
-        cd TimeZoneData
+        cd ./TimeZoneData
         dotnet pack --output ./nupkgs /p:PackageVersion=1.0.0 /p:PackageId=YourPackageName
     
     - name: Upload NuGet Package
