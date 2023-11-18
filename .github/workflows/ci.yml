@@ -19,7 +19,18 @@ jobs:
     steps:
     - name: Download tzdata
       run: wget 'https://www.iana.org/time-zones/repository/tzdata-latest.tar.gz'
+      
     - name: Extract tzdata
       run: tar -xzf tzdata-latest.tar.gz africa antarctica asia australasia etcetera europe factory northamerica southamerica
+
     - name: Compile timezone data
-      run: sudo zic -d /usr/share/zoneinfo/ africa antarctica asia australasia etcetera europe factory northamerica southamerica
+      run: sudo zic -d tzdata_compiled/ africa antarctica asia australasia etcetera europe factory northamerica southamerica
+
+    - name: Compress compiled timezone data
+      run: tar -czvf tzdata_compiled.tar.gz tzdata_compiled
+
+    - name: Upload Compiled Timezone Data
+      uses: actions/upload-artifact@v2
+      with:
+        name: compiled-tzdata
+        path: tzdata_compiled.tar.gz
