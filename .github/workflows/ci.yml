@@ -20,6 +20,6 @@ jobs:
     - name: Download tzdata
       run: wget 'https://www.iana.org/time-zones/repository/tzdata-latest.tar.gz'
     - name: Extract tzdata
-      run: tar -xzf tzdata-latest.tar.gz
+      run: tar -xzf tzdata-latest.tar.gz africa antarctica asia australasia etcetera europe factory northamerica southamerica
     - name: Compile timezone data
-      run: sudo zic -d /usr/share/zoneinfo/ *
+      run: sudo zic -d /usr/share/zoneinfo/ africa antarctica asia australasia etcetera europe factory northamerica southamerica
